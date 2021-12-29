@@ -1,0 +1,9 @@
+{
+  "name": "ts-scripts",
+  "version": "1.0.0",
+  "description": "ts scripts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "postbuild": "node copyJsFile.js ./.output/src ../UnityProject/Assets/AssetBundlesRoot/Scripts"
+  }
+}

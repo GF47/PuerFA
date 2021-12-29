@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: ae1dc971b7d89984eae8f34253164a1f
+  m_SerializeEntries:
+  - m_GUID: b24e6d293ec515b45aba3f9f06358625
+    m_Address: Assets/AssetBundlesRoot/Textures/UnitySplash-cube.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 32e701fa2f0e43044970a25ec85abd0b
+    m_Address: Assets/AssetBundlesRoot/Textures/U_Logo_T1_MadeWith_Small_White_RGB.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8adcbd23abb5fac44896edb09134b34d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b9f865ddca12a9b4c8f8a861271cb404, type: 2}
+    - {fileID: 11400000, guid: d2c2dbd58af1b9c46989b3ca6c59a731, type: 2}

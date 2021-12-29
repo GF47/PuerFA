@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1920,1080" restrictSize="800,1920,600,1080">
+  <displayList>
+    <image id="n6_ruz0" name="bg" src="ncah0" fileName="bgr.png" pkg="209wp1lj" xy="0,0" pivot="0.5,0.5" size="1920,1080">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n0_ncah" name="title" xy="894,300" pivot="0.5,0.5" size="132,84" fontSize="64" color="#ffffff" autoClearText="true" text="标题">
+      <relation target="" sidePair="center-center,top-top%"/>
+    </text>
+    <text id="n1_ncah" name="message" xy="943,500" pivot="0.5,0.5" size="28,19" restrictSize="0,512,0,0" fontSize="12" color="#ffffff" align="center" vAlign="middle" autoClearText="true" text="通知">
+      <relation target="" sidePair="center-center,top-top%"/>
+    </text>
+    <component id="n2_kww2" name="progress" src="ncah17" fileName="ProgressBar.xml" pkg="209wp1lj" xy="704,700">
+      <relation target="" sidePair="center-center,top-top%"/>
+      <ProgressBar value="50" max="100"/>
+    </component>
+    <component id="n3_k5bb" name="btnUpdate" src="k5bb18" fileName="Button.xml" pkg="209wp1lj" xy="825,750" size="100,40" group="n8_ruz0">
+      <relation target="" sidePair="center-center,top-top"/>
+      <Button title="更新"/>
+    </component>
+    <component id="n7_ruz0" name="btnCancel" src="k5bb18" fileName="Button.xml" pkg="209wp1lj" xy="995,750" size="100,40" group="n8_ruz0">
+      <relation target="" sidePair="center-center,top-top"/>
+      <Button title="退出"/>
+    </component>
+    <group id="n8_ruz0" name="btn" xy="825,750" size="270,40" advanced="true">
+      <relation target="" sidePair="center-center,top-top%"/>
+    </group>
+  </displayList>
+</component>

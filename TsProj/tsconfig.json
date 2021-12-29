@@ -1,0 +1,20 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "typeRoots": [
+      "../UnityProject/Assets/3rd/Puerts/Typing",
+      "../UnityProject/Assets/Gen/Typing",
+      "./node_modules/@types"
+    ],
+    "outDir": "./.output",
+    "removeComments": true
+  },
+  "exclude": [
+    "examples"
+  ]
+}

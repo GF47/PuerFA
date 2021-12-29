@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const puerts_1 = require("puerts");
+const csharp_1 = require("csharp");
+const csharp_2 = require("csharp");
+console.log("hello ts");
+csharp_1.UnityEngine.Debug.Log('hello world from u');
+async function new_texture(path) {
+    let ptexture = await puerts_1.$promise(csharp_1.Modules.AssetsManager.Instance.LoadTexture(path));
+    let image = csharp_2.FairyGUI.UIObjectFactory.NewObject(csharp_2.FairyGUI.ObjectType.Image);
+    image.texture = new csharp_2.FairyGUI.NTexture(ptexture);
+    csharp_2.FairyGUI.GRoot.inst.AddChild(image);
+}
+let path = 'Assets/AssetBundlesRoot/Textures/UnitySplash-cube.png';
+new_texture(path);
+csharp_2.FairyGUI.Stage.inst.onKeyDown.Add(context => {
+    if (context.inputEvent.keyCode == csharp_1.UnityEngine.KeyCode.Space) {
+        console.log(csharp_1.Modules.AssetsManager.Instance.Release(path));
+    }
+});
+//# sourceMappingURL=launcher.js.map

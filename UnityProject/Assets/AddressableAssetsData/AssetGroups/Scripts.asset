@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Scripts
+  m_EditorClassIdentifier: 
+  m_GroupName: Scripts
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 18c32ce841a10bc4fb1cd7b442ee616e
+  m_SerializeEntries:
+  - m_GUID: 983d749f73f508743964ae95cc6e1fab
+    m_Address: Assets/AssetBundlesRoot/Scripts/launcher.js.txt
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scripts
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8adcbd23abb5fac44896edb09134b34d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fc630b658050d6a4e8a5598201ab3ff3, type: 2}
+    - {fileID: 11400000, guid: edba358b5a58c994cb2f6aab7275b5d1, type: 2}

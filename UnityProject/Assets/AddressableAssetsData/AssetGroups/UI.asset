@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 912d789768b0add45829ac208af3c937
+  m_SerializeEntries:
+  - m_GUID: efbaf59a42dabc2468f8cc2216248af7
+    m_Address: Assets/AssetBundlesRoot/FGUI/Common_atlas0.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3a54c31b488864949b4f8fca99826975
+    m_Address: Assets/AssetBundlesRoot/FGUI/Common_fui.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c99cf92839219904a9dd4569f809bd0e
+    m_Address: Assets/AssetBundlesRoot/FGUI/Main_fui.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f60914e804e93b04d94e9efe4b01cf1b
+    m_Address: Assets/AssetBundlesRoot/FGUI/RemoteUpdate_fui.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8adcbd23abb5fac44896edb09134b34d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1df60aa2982a31345b3edb50940b3649, type: 2}
+    - {fileID: 11400000, guid: 0a97e2a367c1be7409160f0dae681798, type: 2}
