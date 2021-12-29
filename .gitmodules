@@ -1,0 +1,3 @@
+[submodule "UIProject/plugins/fairygui-puerts-unity"]
+	path = UIProject/plugins/fairygui-puerts-unity
+	url = git@github.com:fy0/fairygui-puerts-unity.git
