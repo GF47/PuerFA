@@ -44,9 +44,6 @@ namespace Puerts
 
         public static bool IsSupportedMethod(MethodInfo method)
         {
-#if !UNITY_EDITOR && ENABLE_IL2CPP && !PUERTS_REFLECT_ALL_EXTENSION
-            if (method.IsGenericMethodDefinition) return false;
-#endif
             if (!method.ContainsGenericParameters)
                 return true;
             var methodParameters = method.GetParameters();

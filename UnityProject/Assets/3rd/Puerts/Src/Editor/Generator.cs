@@ -1458,18 +1458,6 @@ namespace Puerts.Editor
                 AssetDatabase.Refresh();
             }
 
-            [MenuItem("Puerts/Generate index.d.ts ESM compatible (unstable)", false, 1)]
-            public static void GenerateDTSESM()
-            {
-                var start = DateTime.Now;
-                var saveTo = Configure.GetCodeOutputDirectory();
-                Directory.CreateDirectory(saveTo);
-                Directory.CreateDirectory(Path.Combine(saveTo, "Typing/csharp"));
-                GenerateCode(saveTo, true, true);
-                Debug.Log("finished! use " + (DateTime.Now - start).TotalMilliseconds + " ms");
-                AssetDatabase.Refresh();
-            }
-
             [MenuItem("Puerts/Clear Generated Code", false, 2)]
             public static void ClearAll()
             {
@@ -1482,7 +1470,7 @@ namespace Puerts.Editor
                 }
             }
 
-            public static void GenerateCode(string saveTo, bool tsOnly = false, bool esmMode = false)
+            public static void GenerateCode(string saveTo, bool tsOnly = false)
             {
                 Utils.filters = Configure.GetFilters();
                 var configure = Configure.GetConfigureByTags(new List<string>() {
@@ -1513,7 +1501,8 @@ namespace Puerts.Editor
 
                 using (var jsEnv = new JsEnv())
                 {
-                    var wrapRender = jsEnv.Eval<Func<GenClass.TypeGenInfo, string>>("require('puerts/templates/wrapper.tpl.cjs')");
+                    var templateGetter = jsEnv.Eval<Func<string, Func<object, string>>>("require('puerts/gencode/main.cjs')");
+                    var wrapRender = templateGetter("type.tpl");
 
                     if (!tsOnly)
                     {
@@ -1544,7 +1533,7 @@ namespace Puerts.Editor
                             }
                         }
 
-                        var autoRegisterRender = jsEnv.Eval<Func<GenClass.TypeGenInfo[], string>>("require('puerts/templates/wrapper-reg.tpl.cjs')");
+                        var autoRegisterRender = templateGetter("autoreg.tpl");
                         using (StreamWriter textWriter = new StreamWriter(saveTo + "AutoStaticCodeRegister.cs", false, Encoding.UTF8))
                         {
                             string fileContext = autoRegisterRender(typeGenInfos.ToArray());
@@ -1552,12 +1541,11 @@ namespace Puerts.Editor
                             textWriter.Flush();
                         }
                     }
-                    
-                    jsEnv.UsingFunc<DTS.TypingGenInfo, bool, string>();
-                    var typingRender = jsEnv.Eval<Func<DTS.TypingGenInfo, bool, string>>("require('puerts/templates/dts.tpl.cjs')");
+
+                    var typingRender = templateGetter("typing.tpl");
                     using (StreamWriter textWriter = new StreamWriter(saveTo + "Typing/csharp/index.d.ts", false, Encoding.UTF8))
                     {
-                        string fileContext = typingRender(DTS.TypingGenInfo.FromTypes(tsTypes), esmMode);
+                        string fileContext = typingRender(DTS.TypingGenInfo.FromTypes(tsTypes));
                         textWriter.Write(fileContext);
                         textWriter.Flush();
                     }

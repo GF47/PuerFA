@@ -124,7 +124,6 @@ namespace Puerts
             PuertsDLL.SetGlobalFunction(isolate, "__tgjsGetNestedTypes", StaticCallbacks.JsEnvCallbackWrap, AddCallback(GetNestedTypes));
             PuertsDLL.SetGlobalFunction(isolate, "__tgjsGetLoader", StaticCallbacks.JsEnvCallbackWrap, AddCallback(GetLoader));
 
-            PuertsDLL.SetModuleResolver(isolate, StaticCallbacks.ModuleResolverWrap, Idx);
             //可以DISABLE掉自动注册，通过手动调用PuertsStaticWrap.AutoStaticCodeRegister.Register(jsEnv)来注册
 #if !DISABLE_AUTO_REGISTER
             const string AutoStaticCodeRegisterClassName = "PuertsStaticWrap.AutoStaticCodeRegister";
@@ -150,25 +149,25 @@ namespace Puerts
             }
 
             bool isNode = PuertsDLL.GetLibBackend() == 1;
-            ExecuteModule("puerts/init.mjs");
-            ExecuteModule("puerts/log.mjs");
-            ExecuteModule("puerts/cjsload.mjs");
-            ExecuteModule("puerts/modular.mjs");
-            ExecuteModule("puerts/csharp.mjs");
-            ExecuteModule("puerts/timer.mjs");
+            ExecuteFile("puerts/init.js");
+            ExecuteFile("puerts/log.js");
+            ExecuteFile("puerts/cjsload.js");
+            ExecuteFile("puerts/modular.js");
+            ExecuteFile("puerts/csharp.js");
+            ExecuteFile("puerts/timer.js");
             
-            ExecuteModule("puerts/events.mjs");
-            ExecuteModule("puerts/promises.mjs");
+            ExecuteFile("puerts/events.js");
+            ExecuteFile("puerts/promises.js");
 #if !PUERTS_GENERAL
             if (!isNode) 
             {
 #endif
-                ExecuteModule("puerts/polyfill.mjs");
+                ExecuteFile("puerts/polyfill.js");
 #if !PUERTS_GENERAL
             }
             else
             {
-                ExecuteModule("puerts/nodepatch.mjs");
+                ExecuteFile("puerts/nodepatch.js");
             }
 #endif
 
@@ -181,35 +180,17 @@ namespace Puerts
 #endif
         }
 
-        internal string ResolveModuleContent(string identifer) 
-        {
-            if (!loader.FileExists(identifer)) 
-            {
-                return null;
-            }
-
-            string debugPath;
-            return loader.ReadFile(identifer, out debugPath);
-        }
-
-        public void ExecuteModule(string filename)
+        void ExecuteFile(string filename)
         {
             if (loader.FileExists(filename))
             {
-                IntPtr resultInfo = PuertsDLL.ExecuteModule(isolate, filename);
-                if (resultInfo == IntPtr.Zero)
+                string debugPath;
+                var context = loader.ReadFile(filename, out debugPath);
+                if (context == null)
                 {
-                    string exceptionInfo = PuertsDLL.GetLastExceptionInfo(isolate);
-                    throw new Exception(exceptionInfo);
+                    throw new InvalidProgramException("can not find " + filename);
                 }
-                PuertsDLL.ResetResult(resultInfo);
-                // string debugPath;
-                // var context = loader.ReadFile(filename, out debugPath);
-                // if (context == null)
-                // {
-                //     throw new InvalidProgramException("can not find " + filename);
-                // }
-                // Eval(context, debugPath);
+                Eval(context, debugPath);
             }
             else
             {
