@@ -1,20 +1,14 @@
 {
   "libview.firstColumnWidth": 283,
   "libview.iconScale": 0,
-  "doc.openedDocs": [
-    "ui://2ddcaxpyncah1",
-    "ui://209wp1ljk5bb18"
-  ],
+  "doc.openedDocs": [],
   "libview.syncEditor": 0,
   "test.device": "1920x1080",
   "canvasColor": 10066329,
   "auxline2": true,
-  "doc.activeDoc": "ui://209wp1ljk5bb18",
   "libview.twoColumn": false,
   "libview.expandedNodes": [
     "209wp1lj",
-    "/",
-    "2tdmyt0o",
     "/",
     "2ddcaxpy",
     "/"

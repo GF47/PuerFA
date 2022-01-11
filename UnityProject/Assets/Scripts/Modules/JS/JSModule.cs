@@ -1,5 +1,6 @@
 ﻿using Puerts;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -25,7 +26,7 @@ namespace Modules.JS
         /// <summary>
         /// 是否已经加载完毕
         /// </summary>
-        public bool State { get; private set; }
+        public bool Ready { get; private set; }
 
         private void Awake()
         {
@@ -41,29 +42,50 @@ namespace Modules.JS
 
             Using(Env); // 先于js环境
 
-            var operation = Addressables.LoadAssetsAsync<TextAsset>("Scripts", null); // 脚本需要被标记为 Scripts
-            operation.Completed += list =>
+            LoadScripts();
+        }
+
+        private void OnDestroy() => Env.Dispose();
+
+        private void Update() => Env.Tick();
+
+        private async void LoadScripts()
+        {
+            var root = "Assets/AssetBundlesRoot/Scripts/";
+            var rootLength = root.Length;
+            var ext = ".txt";
+            var extLength = ext.Length;
+
+            var tasks = new List<Task>();
+
+            foreach (var locator in Addressables.ResourceLocators)
             {
-                foreach (var item in list.Result)
+                if (locator.Locate("Scripts", typeof(TextAsset), out var locations)) // 脚本需要被标记为 Scripts
                 {
-                    JSFiles.Add(item.name, item.text);
+                    if (locations != null)
+                    {
+                        foreach (var location in locations)
+                        {
+                            // Debug.Log($"{location.ProviderId}\n{location.PrimaryKey}\n{location.InternalId}\n{location.Data}");
+
+                            var path = location.InternalId;
+                            if (path.EndsWith("js.map.txt")) { continue; } // 忽略map文件
+
+                            var operation = Addressables.LoadAssetAsync<TextAsset>(location);
+                            operation.Completed += op =>
+                            {
+                                JSFiles.Add(path.Substring(rootLength, path.Length - rootLength - extLength), op.Result.text);
+                            };
+
+                            tasks.Add(operation.Task);
+                        }
+                    }
                 }
-
-                State = true;
-            };
-        }
-
-        private void OnDestroy()
-        {
-            Env.Dispose();
-        }
-
-        private void Update()
-        {
-            if (State)
-            {
-                Env.Tick();
             }
+
+            await Task.WhenAll(tasks);
+
+            Ready = true;
         }
     }
 }

@@ -1,50 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="209wp1lj">
   <resources>
-    <image id="ncah0" name="bgr.png" path="/" exported="true"/>
-    <image id="ncah1" name="Line.png" path="/Panels/"/>
-    <image id="ncah2" name="OutlinePanel.png" path="/Panels/"/>
-    <image id="ncah3" name="Panel.png" path="/Panels/"/>
-    <image id="ncah4" name="PopUp.png" path="/Panels/"/>
-    <image id="ncah5" name="PopUp30Corner.png" path="/Panels/"/>
-    <image id="ncah6" name="PopUp40Corner.png" path="/Panels/"/>
-    <image id="ncah7" name="PopUp50Corner.png" path="/Panels/"/>
-    <image id="ncah8" name="PopUp60Corner.png" path="/Panels/"/>
-    <image id="ncah9" name="PopUp70Corner.png" path="/Panels/"/>
-    <image id="ncaha" name="Shadow.png" path="/Panels/"/>
-    <image id="ncahc" name="FillAndBgrScrollBarHorisontal.png" path="/Sliders/"/>
-    <image id="ncahd" name="FillAndBgrSliderBar.png" path="/Sliders/"/>
-    <image id="ncahe" name="FillAndBgrSmallSliderBar.png" path="/Sliders/"/>
-    <image id="ncahf" name="FillSliderBar.png" path="/Sliders/" scale="9grid" scale9grid="16,16,29,11"/>
-    <image id="ncahg" name="FillSmallSliderBar.png" path="/Sliders/"/>
-    <image id="ncahh" name="SliderBar.png" path="/Sliders/"/>
-    <image id="ncahi" name="EmptyLifeBubble.png" path="/Sliders/Bubble/"/>
-    <image id="ncahj" name="FillBubble.png" path="/Sliders/Bubble/"/>
-    <image id="ncahk" name="OutlineBubble.png" path="/Sliders/Bubble/"/>
-    <image id="ncahl" name="ButtonNormal.png" path="/Buttons/ButtonaNormalDark/ButtonsNormal/" scale="9grid" scale9grid="16,16,51,53"/>
-    <image id="ncahm" name="ButtonNormalHighlighted.png" path="/Buttons/ButtonaNormalDark/ButtonsNormal/" scale="9grid" scale9grid="16,16,55,53"/>
-    <image id="ncahn" name="ButtonNormalLock.png" path="/Buttons/ButtonaNormalDark/ButtonsNormal/" scale="9grid" scale9grid="16,16,55,53"/>
-    <image id="ncaho" name="ButtonNormalPressed.png" path="/Buttons/ButtonaNormalDark/ButtonsNormal/" scale="9grid" scale9grid="16,16,55,53"/>
-    <image id="ncahp" name="ButtonOutline.png" path="/Buttons/ButtonsOutline/" scale="9grid" scale9grid="16,16,51,53"/>
-    <image id="ncahq" name="ButtonOutlineHighlighted.png" path="/Buttons/ButtonsOutline/"/>
-    <image id="ncahr" name="ButtonOutlineLock.png" path="/Buttons/ButtonsOutline/"/>
-    <image id="ncahs" name="ButtonOutlinePressed.png" path="/Buttons/ButtonsOutline/"/>
-    <image id="ncaht" name="ButtonRed Highlighted.png" path="/Buttons/ButtonsRed/ButtonsColors/"/>
-    <image id="ncahu" name="ButtonRed.png" path="/Buttons/ButtonsRed/ButtonsColors/"/>
-    <image id="ncahv" name="ButtonRedLock.png" path="/Buttons/ButtonsRed/ButtonsColors/"/>
-    <image id="ncahw" name="ButtonRedPressed.png" path="/Buttons/ButtonsRed/ButtonsColors/"/>
-    <image id="ncahx" name="ButtonNormal.png" path="/Buttons/ButtonsRed/ButtonsNormal/"/>
-    <image id="ncahy" name="ButtonNormalHighligheted.png" path="/Buttons/ButtonsRed/ButtonsNormal/"/>
-    <image id="ncahz" name="ButtonNormalLock.png" path="/Buttons/ButtonsRed/ButtonsNormal/"/>
-    <image id="ncah10" name="ButtonNormalPressed.png" path="/Buttons/ButtonsRed/ButtonsNormal/"/>
-    <image id="ncah11" name="BgrRadiobitton.png" path="/Buttons/Others/"/>
-    <image id="ncah12" name="BgrToggleButton.png" path="/Buttons/Others/"/>
-    <image id="ncah13" name="ButtonExit.png" path="/Buttons/Others/"/>
-    <image id="ncah14" name="ElipseWithOutline.png" path="/Buttons/Others/"/>
-    <image id="ncah15" name="FillAndBgrScrollBarVertical.png" path="/Buttons/Others/"/>
-    <image id="ncah16" name="Handle.png" path="/Buttons/Others/"/>
     <component id="ncah17" name="ProgressBar.xml" path="/" exported="true"/>
     <component id="k5bb18" name="Button.xml" path="/" exported="true"/>
+    <component id="mun019" name="About.xml" path="/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

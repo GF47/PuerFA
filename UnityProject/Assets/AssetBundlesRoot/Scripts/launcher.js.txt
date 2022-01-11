@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const puerts_1 = require("puerts");
 const csharp_1 = require("csharp");
 const csharp_2 = require("csharp");
+const UI_About_1 = require("./FGUI/Common/UI_About");
+const CommonBinder_1 = require("./FGUI/Common/CommonBinder");
 console.log("hello ts");
 csharp_1.UnityEngine.Debug.Log('hello world from u');
 async function new_texture(path) {
@@ -13,9 +15,29 @@ async function new_texture(path) {
 }
 let path = 'Assets/AssetBundlesRoot/Textures/UnitySplash-cube.png';
 new_texture(path);
+console.log('按空格打开About窗口');
 csharp_2.FairyGUI.Stage.inst.onKeyDown.Add(context => {
     if (context.inputEvent.keyCode == csharp_1.UnityEngine.KeyCode.Space) {
-        console.log(csharp_1.Modules.AssetsManager.Instance.Release(path));
+        openAbout();
     }
 });
+class About {
+    ui;
+    constructor(ui) {
+        this.ui = ui;
+        csharp_2.FairyGUI.GRoot.inst.AddChild(ui);
+        ui.m_btn_close.onClick.Set(() => { ui.displayObject.gameObject.SetActive(false); });
+    }
+}
+let about;
+async function openAbout() {
+    let pkg = await puerts_1.$promise(csharp_1.Modules.FGUI.Util.AddAddressablePackage('Common'));
+    CommonBinder_1.default.register();
+    if (about == null) {
+        about = new About(UI_About_1.default.createInstance());
+    }
+    else {
+        about.ui.displayObject.gameObject.SetActive(true);
+    }
+}
 //# sourceMappingURL=launcher.js.map

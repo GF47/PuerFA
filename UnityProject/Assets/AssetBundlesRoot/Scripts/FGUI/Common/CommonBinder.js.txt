@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const csharp_1 = require("csharp");
+const UI_About_1 = require("./UI_About");
+const UI_ProgressBar_1 = require("./UI_ProgressBar");
+class CommonBinder {
+    static register() {
+        csharp_1.FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_About_1.default.URL, () => new UI_About_1.default());
+        csharp_1.FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_ProgressBar_1.default.URL, () => new UI_ProgressBar_1.default());
+    }
+}
+exports.default = CommonBinder;
+//# sourceMappingURL=CommonBinder.js.map

@@ -1,0 +1,14 @@
+{
+  "name": "puerfa-code-generator",
+  "displayName": "PuerFA的代码生成器",
+  "description": "生成供Puerts使用的ts绑定代码\n（待定-同时生成c#版本的）",
+  "version": "1.1.0",
+  "author": {
+    "name": "GF47(liougouren_mo)"
+  },
+  "icon": "",
+  "main": "main.js",
+  "scripts": {
+      "gen": "tsc -w"
+  }
+}

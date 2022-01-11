@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,400">
+  <displayList>
+    <graph id="n0_mun0" name="bg" xy="0,0" size="400,400" type="rect" fillColor="#ff333333" corner="25">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n1_mun0" name="title" xy="24,24" size="36,24" fontSize="16" color="#ffffff" text="关于"/>
+    <component id="n2_mun0" name="btn_close" src="k5bb18" fileName="Button.xml" xy="376,376" pivot="1,1" anchor="true">
+      <Button title="关闭"/>
+    </component>
+    <richtext id="n3_mun0" name="content" xy="24,64" size="352,256" fontSize="16" color="#ffffff" autoSize="none" text="&lt;a href=&apos;https://github.com/GF47/PuerFA&apos;&gt;PuerFA&lt;/a&gt;"/>
+  </displayList>
+</component>

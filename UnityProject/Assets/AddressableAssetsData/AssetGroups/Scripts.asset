@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 18c32ce841a10bc4fb1cd7b442ee616e
   m_SerializeEntries:
-  - m_GUID: 983d749f73f508743964ae95cc6e1fab
-    m_Address: Assets/AssetBundlesRoot/Scripts/launcher.js.txt
+  - m_GUID: cb8daf57d88e13f4da027f38b974f5ce
+    m_Address: Assets/AssetBundlesRoot/Scripts
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scripts

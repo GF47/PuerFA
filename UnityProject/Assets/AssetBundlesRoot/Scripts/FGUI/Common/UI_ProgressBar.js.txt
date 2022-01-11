@@ -1,0 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const csharp_1 = require("csharp");
+class UI_ProgressBar extends csharp_1.FairyGUI.GProgressBar {
+    m_bg;
+    static URL = "ui://209wp1ljncah17";
+    static createInstance() {
+        return (csharp_1.FairyGUI.UIPackage.CreateObject("Common", "ProgressBar"));
+    }
+    constructor() {
+        super();
+        this.__onConstruct = () => {
+            this.m_bg = (this.GetChildAt(0));
+        };
+    }
+}
+exports.default = UI_ProgressBar;
+//# sourceMappingURL=UI_ProgressBar.js.map

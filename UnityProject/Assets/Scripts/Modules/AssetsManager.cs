@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine.AddressableAssets;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Modules
@@ -12,6 +9,7 @@ namespace Modules
     public class AssetsManager
     {
         #region Singleton
+
         public static AssetsManager Instance
         {
             get
@@ -23,10 +21,12 @@ namespace Modules
                 return _instance;
             }
         }
+
         private static AssetsManager _instance;
+
         #endregion Singleton
 
-        Dictionary<string, AsyncOperationHandle> _dict;
+        private Dictionary<string, AsyncOperationHandle> _dict;
 
         public AssetsManager()
         {
@@ -42,6 +42,7 @@ namespace Modules
         }
 
         public async Task<Texture> LoadTexture(string path) => await Load<Texture>(path);
+
         public async Task<AudioClip> LoadAudioClip(string path) => await Load<AudioClip>(path);
 
         public bool Release(string path)

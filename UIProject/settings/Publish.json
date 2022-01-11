@@ -8,8 +8,8 @@
   "jpegQuality": 80,
   "compressPNG": false,
   "codeGeneration": {
-    "allowGenCode": false,
-    "codePath": "E:\\Work\\Projects\\ChangQingYouTian\\Assets\\UI\\.output\\Scripts",
+    "allowGenCode": true,
+    "codePath": "..\\TsProj\\src\\FGUI",
     "classNamePrefix": "UI_",
     "memberNamePrefix": "m_",
     "packageName": null,

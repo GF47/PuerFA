@@ -2,6 +2,9 @@ import { $generic, $typeof, $promise } from 'puerts';
 import { Modules, UnityEngine } from 'csharp';
 import { FairyGUI } from 'csharp';
 
+import UI_About from './FGUI/Common/UI_About';
+import CommonBinder from './FGUI/Common/CommonBinder';
+
 console.log("hello ts");
 
 UnityEngine.Debug.Log('hello world from u');
@@ -18,7 +21,7 @@ async function new_texture(path: string) {
     FairyGUI.GRoot.inst.AddChild(image);
 }
 
-let path = 
+let path =
 //*/
 'Assets/AssetBundlesRoot/Textures/UnitySplash-cube.png'; // default
 /*/
@@ -27,8 +30,30 @@ let path =
 
 new_texture(path);
 
+console.log('按空格打开About窗口');
 FairyGUI.Stage.inst.onKeyDown.Add(context => {
     if (context.inputEvent.keyCode == UnityEngine.KeyCode.Space) {
-        console.log(Modules.AssetsManager.Instance.Release(path));
+        openAbout();
     }
 });
+
+class About {
+    public ui: UI_About;
+    constructor(ui: UI_About) {
+        this.ui = ui;
+        FairyGUI.GRoot.inst.AddChild(ui);
+        ui.m_btn_close.onClick.Set(() => { ui.displayObject.gameObject.SetActive(false); });
+    }
+}
+
+let about: About;
+async function openAbout() {
+    let pkg = await $promise(Modules.FGUI.Util.AddAddressablePackage('Common'));
+    CommonBinder.register();
+    if (about == null) {
+        about = new About(UI_About.createInstance());
+    }
+    else {
+        about.ui.displayObject.gameObject.SetActive(true);
+    }
+}

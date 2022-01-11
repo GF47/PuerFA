@@ -3,6 +3,8 @@
 .temp/
 ~temp/
 
+node_modules/
+
 # ---> Unity
 /UnityProject/[Ll]ibrary/
 /UnityProject/[Ll]ogs/

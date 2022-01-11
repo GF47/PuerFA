@@ -1,9 +1,7 @@
 ﻿using FairyGUI;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Modules.FGUI
 {
@@ -15,11 +13,13 @@ namespace Modules.FGUI
         /// <summary>
         /// 默认的 [ FairyGUI ] 资源根目录
         /// </summary>
-        public static string DEFAULT_PACKAGE_ROOT = "Assets/AssetBundlesRoot/FGUI";
+        public static string DEFAULT_PACKAGE_ROOT = "Assets/AssetBundlesRoot/FGUI"; // TODO 保持与fgui资源的根地址一致 //
 
-        private static Dictionary<string, AsyncOperationHandle<TextAsset>> _pkghandles = new Dictionary<string, AsyncOperationHandle<TextAsset>>();
-        private static Dictionary<string, List<AsyncOperationHandle<Texture>>> _texHandles = new Dictionary<string, List<AsyncOperationHandle<Texture>>>();
-        private static Dictionary<string, List<AsyncOperationHandle<AudioClip>>> _audioHandles = new Dictionary<string, List<AsyncOperationHandle<AudioClip>>>();
+        static Util()
+        {
+            NTexture.CustomDestroyMethod += texture => Addressables.Release(texture);
+            NAudioClip.CustomDestroyMethod += audio => Addressables.Release(audio);
+        }
 
         /// <summary>
         /// 加载资源包
@@ -29,44 +29,48 @@ namespace Modules.FGUI
         /// <param name="isFullPath">包名参数是否为完整的 [ Addressables ] 路径</param>
         public static async Task<UIPackage> AddAddressablePackage(string package, string prefix = "", bool isFullPath = false)
         {
-            if (_pkghandles.ContainsKey(package)) { return UIPackage.GetByName(package); }
+            var pkg = UIPackage.GetByName(package);
 
-            var descHandle = Addressables.LoadAssetAsync<TextAsset>(isFullPath
-                ? package
-                : $"{DEFAULT_PACKAGE_ROOT}/{package}_fui.bytes");
-            _pkghandles.Add(package, descHandle);
-
-            var desc = await descHandle.Task;
-
-            // desc.bytes : description file data
-            // prefix     : prefix of the resource file name. The file name would be in format of 'assetNamePrefix_resFileName'. It can be empty.
-            // name       : asset name, without DEFAULT_PACKAGE_ROOT and extension
-            // extension  : ".png" and so on
-            // type       : asset type like "Texture", "AudioClip"
-            // item       : FairyGUI asset object
-            return UIPackage.AddPackage(desc.bytes, prefix, async (name, extension, type, item) =>
+            if (pkg == null)
             {
-                if (type == typeof(Texture))
+                var descHandle = Addressables.LoadAssetAsync<TextAsset>(isFullPath
+                    ? package
+                    : $"{DEFAULT_PACKAGE_ROOT}/{package}_fui.bytes");
+
+                var desc = await descHandle.Task;
+
+                // desc.bytes : description file data
+                // prefix     : prefix of the resource file name. The file name would be in format of 'assetNamePrefix_resFileName'. It can be empty.
+                // name       : asset name, without DEFAULT_PACKAGE_ROOT and extension
+                // extension  : ".png" and so on
+                // type       : asset type like "Texture", "AudioClip"
+                // item       : FairyGUI asset object
+                pkg = UIPackage.AddPackage(desc.bytes, prefix, async (name, extension, type, item) =>
                 {
-                    var handle = Addressables.LoadAssetAsync<Texture>(isFullPath
-                        ? package.Replace("fui.bytes", $"{name}{extension}")
-                        : $"{DEFAULT_PACKAGE_ROOT}/{package}_{name}{extension}");
-                    GetTextureHandles(package).Add(handle);
-                    var texture = await handle.Task;
+                    if (type == typeof(Texture))
+                    {
+                        var handle = Addressables.LoadAssetAsync<Texture>(isFullPath
+                            ? package.Replace("fui.bytes", $"{name}{extension}")
+                            : $"{DEFAULT_PACKAGE_ROOT}/{package}_{name}{extension}");
+                        var texture = await handle.Task;
                     // 谷大让加上这句(
-                    item.owner.SetItemAsset(item, texture, DestroyMethod.None);
-                }
-                else if (type == typeof(AudioClip))
-                {
-                    var handle = Addressables.LoadAssetAsync<AudioClip>(isFullPath
-                        ? package.Replace("fui.bytes", $"{name}{extension}")
-                        : $"{DEFAULT_PACKAGE_ROOT}/{package}_{name}{extension}");
-                    GetAudioClipHandles(package).Add(handle);
-                    var clip = await handle.Task;
+                    item.owner.SetItemAsset(item, texture, DestroyMethod.Custom);
+                    }
+                    else if (type == typeof(AudioClip))
+                    {
+                        var handle = Addressables.LoadAssetAsync<AudioClip>(isFullPath
+                            ? package.Replace("fui.bytes", $"{name}{extension}")
+                            : $"{DEFAULT_PACKAGE_ROOT}/{package}_{name}{extension}");
+                        var clip = await handle.Task;
                     // 谷大让加上这句(
-                    item.owner.SetItemAsset(item, clip, DestroyMethod.None);
-                }
-            });
+                    item.owner.SetItemAsset(item, clip, DestroyMethod.Custom);
+                    }
+                });
+
+                Addressables.Release(desc);
+            }
+
+            return pkg;
         }
 
         /// <summary>
@@ -75,69 +79,7 @@ namespace Modules.FGUI
         /// <param name="packageOrID">包名或者包ID</param>
         public static void RemoveAddressablePackage(string packageOrID)
         {
-            var package = UIPackage.GetById(packageOrID);
-            var packageName = package == null ? packageOrID : package.name;
-
             UIPackage.RemovePackage(packageOrID);
-
-            if (!string.IsNullOrEmpty(packageName))
-            {
-                if (_pkghandles.TryGetValue(packageName, out var pkgHandle))
-                {
-                    Addressables.Release(pkgHandle);
-                    _pkghandles.Remove(packageName);
-                }
-
-                if (_texHandles.TryGetValue(packageName, out var texHandles))
-                {
-                    foreach (var handle in texHandles)
-                    {
-                        Addressables.Release(handle);
-                    }
-
-                    _texHandles.Remove(packageName);
-                }
-
-                if (_audioHandles.TryGetValue(packageName, out var audioHandles))
-                {
-                    foreach (var handle in audioHandles)
-                    {
-                        Addressables.Release(handle);
-                    }
-
-                    _audioHandles.Remove(packageName);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取加载记录中的句柄列表
-        /// </summary>
-        /// <param name="pkgName">包名</param>
-        private static List<AsyncOperationHandle<Texture>> GetTextureHandles(string pkgName)
-        {
-            List<AsyncOperationHandle<Texture>> handles;
-            if (!_texHandles.TryGetValue(pkgName, out handles))
-            {
-                handles = new List<AsyncOperationHandle<Texture>>();
-                _texHandles.Add(pkgName, handles);
-            }
-            return handles;
-        }
-
-        /// <summary>
-        /// 获取加载记录中的句柄列表
-        /// </summary>
-        /// <param name="pkgName">包名</param>
-        private static List<AsyncOperationHandle<AudioClip>> GetAudioClipHandles(string pkgName)
-        {
-            List<AsyncOperationHandle<AudioClip>> handles;
-            if (!_audioHandles.TryGetValue(pkgName, out handles))
-            {
-                handles = new List<AsyncOperationHandle<AudioClip>>();
-                _audioHandles.Add(pkgName, handles);
-            }
-            return handles;
         }
     }
 }

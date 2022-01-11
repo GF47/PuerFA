@@ -21,7 +21,7 @@ public static class TheEnter
     private static System.Collections.IEnumerator __JsInit()
     {
         var js = Modules.JS.JSModule.Instance;
-        yield return new WaitUntil(() => js.State);
+        yield return new WaitUntil(() => js.Ready);
         js.Env.Eval("require('launcher')");
     }
 }

@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="100,50" extention="Button">
-  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+<component size="100,50" pivot="0.5,0.5" extention="Button">
+  <controller name="button" pages="0,up,1,down" selected="0"/>
   <displayList>
-    <image id="n0_k5bb" name="n0" src="ncahl" fileName="Buttons/ButtonaNormalDark/ButtonsNormal/ButtonNormal.png" xy="0,0" size="100,50">
-      <gearDisplay controller="button" pages="0"/>
+    <graph id="n0_k5bb" name="n0" xy="0,0" size="100,50" type="rect" fillColor="#ff666666" corner="16">
       <relation target="" sidePair="width-width,height-height"/>
-    </image>
-    <image id="n1_k5bb" name="n1" src="ncaho" fileName="Buttons/ButtonaNormalDark/ButtonsNormal/ButtonNormalPressed.png" xy="-2,0" size="104,50">
-      <gearDisplay controller="button" pages="1"/>
-      <relation target="" sidePair="width-width,height-height"/>
-    </image>
-    <image id="n2_k5bb" name="n2" src="ncahm" fileName="Buttons/ButtonaNormalDark/ButtonsNormal/ButtonNormalHighlighted.png" xy="-2,0" size="104,50">
-      <gearDisplay controller="button" pages="2"/>
-      <relation target="" sidePair="width-width,height-height"/>
-    </image>
-    <image id="n3_k5bb" name="n3" src="ncahn" fileName="Buttons/ButtonaNormalDark/ButtonsNormal/ButtonNormalLock.png" xy="-2,0" size="104,50">
-      <gearDisplay controller="button" pages="3"/>
-      <relation target="" sidePair="width-width,height-height"/>
-    </image>
+    </graph>
     <text id="n4_k5bb" name="title" xy="0,0" size="100,50" fontSize="12" color="#ffffff" align="center" vAlign="middle" autoSize="none" singleLine="true" autoClearText="true" text="Button">
       <relation target="" sidePair="width-width,height-height"/>
     </text>
   </displayList>
-  <Button/>
+  <Button downEffect="scale" downEffectValue=".95"/>
 </component>

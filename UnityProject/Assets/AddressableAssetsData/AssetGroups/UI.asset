@@ -17,20 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 912d789768b0add45829ac208af3c937
   m_SerializeEntries:
-  - m_GUID: efbaf59a42dabc2468f8cc2216248af7
-    m_Address: Assets/AssetBundlesRoot/FGUI/Common_atlas0.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 3a54c31b488864949b4f8fca99826975
-    m_Address: Assets/AssetBundlesRoot/FGUI/Common_fui.bytes
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: c99cf92839219904a9dd4569f809bd0e
-    m_Address: Assets/AssetBundlesRoot/FGUI/Main_fui.bytes
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: f60914e804e93b04d94e9efe4b01cf1b
-    m_Address: Assets/AssetBundlesRoot/FGUI/RemoteUpdate_fui.bytes
+  - m_GUID: d33e4d2a2f10c1547802cfa1a7bcb172
+    m_Address: Assets/AssetBundlesRoot/FGUI
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

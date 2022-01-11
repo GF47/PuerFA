@@ -17,10 +17,6 @@ vscode打开TsProj工程，修改ts代码，然后在vscode打开一个TERMINAL�
 
 第三方UI方案，可以脱离Unity环境制作UI界面，解放码农，造福美术。
 
-附带了一个生成 __TypeScript__ 代码的插件
-
-[fy0/fairygui-puerts-unity](https://github.com/fy0/fairygui-puerts-unity)
-
 ## Addressables
 
 资源更新方案，用着还行。
