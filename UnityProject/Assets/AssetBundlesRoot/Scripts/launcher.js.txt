@@ -32,7 +32,7 @@ class About {
 let about;
 async function openAbout() {
     let pkg = await puerts_1.$promise(csharp_1.Modules.FGUI.Util.AddAddressablePackage('Common'));
-    CommonBinder_1.default.register();
+    CommonBinder_1.default.bind();
     if (about == null) {
         about = new About(UI_About_1.default.createInstance());
     }

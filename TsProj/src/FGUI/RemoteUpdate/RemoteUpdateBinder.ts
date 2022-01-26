@@ -5,7 +5,7 @@ import { FairyGUI } from "csharp";
 import UI_View from "./UI_View";
 
 export default class RemoteUpdateBinder {
-	public static register(): void {
+	public static bind(): void {
 		FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_View.URL, () => new UI_View());
 	}
 }

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
 const UI_View_1 = require("./UI_View");
 class RemoteUpdateBinder {
-    static register() {
+    static bind() {
         csharp_1.FairyGUI.UIObjectFactory.SetPackageItemExtension(UI_View_1.default.URL, () => new UI_View_1.default());
     }
 }

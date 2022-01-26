@@ -105,7 +105,7 @@ function genCode(handler: FairyEditor.PublishHandler) {
     writer.writeln('export default class %s', binderName);
     writer.startBlock();
 
-    writer.writeln('public static register(): void');
+    writer.writeln('public static bind(): void');
     writer.startBlock();
     for (let i: number = 0; i < classCnt; i++) {
         let classInfo = classes.get_Item(i);

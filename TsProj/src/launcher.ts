@@ -49,7 +49,7 @@ class About {
 let about: About;
 async function openAbout() {
     let pkg = await $promise(Modules.FGUI.Util.AddAddressablePackage('Common'));
-    CommonBinder.register();
+    CommonBinder.bind();
     if (about == null) {
         about = new About(UI_About.createInstance());
     }
