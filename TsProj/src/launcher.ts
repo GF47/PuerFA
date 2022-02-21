@@ -13,7 +13,7 @@ UnityEngine.Debug.Log('hello world from u');
 // GRT.GLog.Log("hello world from g", 10);
 
 async function new_texture(path: string) {
-    let ptexture = await $promise(Modules.AssetsManager.Instance.LoadTexture(path));
+    let ptexture = await $promise(Modules.FGUI.AddressablesUtil.LoadTexture(path, null));
 
     let image = FairyGUI.UIObjectFactory.NewObject(FairyGUI.ObjectType.Image) as FairyGUI.GImage;
     image.texture = new FairyGUI.NTexture(ptexture);
@@ -48,12 +48,14 @@ class About {
 
 let about: About;
 async function openAbout() {
-    let pkg = await $promise(Modules.FGUI.Util.AddAddressablePackage('Common'));
+    let pkg = await $promise(Modules.FGUI.AddressablesUtil.AddUIPackage('Common'));
     CommonBinder.bind();
     if (about == null) {
         about = new About(UI_About.createInstance());
+        about.ui.Center();
     }
     else {
         about.ui.displayObject.gameObject.SetActive(true);
+        about.ui.Center();
     }
 }

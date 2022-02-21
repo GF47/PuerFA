@@ -8,7 +8,7 @@ const CommonBinder_1 = require("./FGUI/Common/CommonBinder");
 console.log("hello ts");
 csharp_1.UnityEngine.Debug.Log('hello world from u');
 async function new_texture(path) {
-    let ptexture = await puerts_1.$promise(csharp_1.Modules.AssetsManager.Instance.LoadTexture(path));
+    let ptexture = await puerts_1.$promise(csharp_1.Modules.FGUI.AddressablesUtil.LoadTexture(path, null));
     let image = csharp_2.FairyGUI.UIObjectFactory.NewObject(csharp_2.FairyGUI.ObjectType.Image);
     image.texture = new csharp_2.FairyGUI.NTexture(ptexture);
     csharp_2.FairyGUI.GRoot.inst.AddChild(image);
@@ -31,13 +31,15 @@ class About {
 }
 let about;
 async function openAbout() {
-    let pkg = await puerts_1.$promise(csharp_1.Modules.FGUI.Util.AddAddressablePackage('Common'));
+    let pkg = await puerts_1.$promise(csharp_1.Modules.FGUI.AddressablesUtil.AddUIPackage('Common'));
     CommonBinder_1.default.bind();
     if (about == null) {
         about = new About(UI_About_1.default.createInstance());
+        about.ui.Center();
     }
     else {
         about.ui.displayObject.gameObject.SetActive(true);
+        about.ui.Center();
     }
 }
 //# sourceMappingURL=launcher.js.map

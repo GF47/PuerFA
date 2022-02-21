@@ -8,8 +8,8 @@ namespace Modules
     {
         public async void Init(Action completed)
         {
-            var commonPkg = await FGUI.Util.AddAddressablePackage("Common");
-            var remoteUpdatePkg = await FGUI.Util.AddAddressablePackage("RemoteUpdate");
+            var commonPkg = await FGUI.AddressablesUtil.AddUIPackage("Common");
+            var remoteUpdatePkg = await FGUI.AddressablesUtil.AddUIPackage("RemoteUpdate");
 
             var obj = remoteUpdatePkg.CreateObject("View");
             var view = GRoot.inst.AddChild(obj).asCom;
@@ -40,7 +40,7 @@ namespace Modules
                 view.TweenFade(0f, 1f).OnComplete(() =>
                 {
                     view.Dispose();
-                    FGUI.Util.RemoveAddressablePackage(remoteUpdatePkg.id);
+                    FGUI.AddressablesUtil.RemoveUIPackage(remoteUpdatePkg.id);
 
                     completed?.Invoke();
                 });

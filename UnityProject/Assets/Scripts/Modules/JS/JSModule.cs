@@ -58,6 +58,10 @@ namespace Modules.JS
 
             var tasks = new List<Task>();
 
+#if UNITY_EDITOR
+            await Addressables.InitializeAsync().Task;
+#endif
+
             foreach (var locator in Addressables.ResourceLocators)
             {
                 if (locator.Locate("Scripts", typeof(TextAsset), out var locations)) // 脚本需要被标记为 Scripts

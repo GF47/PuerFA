@@ -68,38 +68,10 @@ namespace LK.Modules.JS.Editor
         [Puerts.Binding]
         private static IEnumerable<Type> Bindings => new List<Type>()
         {
+            typeof(System.Collections.Generic.List<int>),
+            typeof(System.Collections.Generic.Dictionary<int, List<int>>),
             // TODO 添加TS使用的类
         };
-
-        /// <summary>
-        /// FairyGUI内的类
-        /// </summary>
-        [Puerts.Binding]
-        private static IEnumerable<Type> FairyGUI
-        {
-            get
-            {
-                var result = new List<Type>();
-
-                var namespaces = new string[]
-                {
-                    "FairyGUI",
-                    "FairyGUI.Utils",
-                };
-
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                result.AddRange(from ass in assemblies
-                                where !(ass.ManifestModule is ModuleBuilder)
-                                from type in ass.GetExportedTypes()
-                                where type.Namespace != null
-                                    && namespaces.Contains(type.Namespace)
-                                    && !IsExcluded(type)
-                                    && type.BaseType != typeof(MulticastDelegate)
-                                    && !type.IsEnum
-                                select type);
-                return result;
-            }
-        }
 
         /// <summary>
         /// Unity 引擎内置类
@@ -114,9 +86,11 @@ namespace LK.Modules.JS.Editor
                 {
                     "UnityEngine",
                     "UnityEngine.UI",
+                    "FairyGUI",
+                    "FairyGUI.Utils",
                 };
 
-                var unityTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                var types = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                   where !(assembly.ManifestModule is ModuleBuilder)
                                   from type in assembly.GetExportedTypes()
                                   where type.Namespace != null
@@ -141,10 +115,28 @@ namespace LK.Modules.JS.Editor
                                     && !type.IsEnum
                                    select type);
 
-                return unityTypes
+                return types
                     .Concat(customTypes)
                     .Distinct();
             }
+        }
+
+        /// <summary>
+        /// 判断是否需要被排除
+        /// </summary>
+        private static bool IsExcluded(Type type)
+        {
+            if (type == null) { return false; }
+
+            var name = System.IO.Path.GetFileName(type.Assembly.Location);
+
+            if (excludedAssemblies.Contains(name)) { return true; }
+
+            var fullName = type.FullName?.Replace('+', '.') ?? "";
+
+            if (excludedTypes.Contains(fullName)) { return true; }
+
+            return IsExcluded(type.BaseType);
         }
 
         /// <summary>
@@ -187,24 +179,6 @@ namespace LK.Modules.JS.Editor
                 }
             }
             return false;
-        }
-
-        /// <summary>
-        /// 判断是否需要被排除
-        /// </summary>
-        private static bool IsExcluded(Type type)
-        {
-            if (type == null) { return false; }
-
-            var name = System.IO.Path.GetFileName(type.Assembly.Location);
-
-            if (excludedAssemblies.Contains(name)) { return true; }
-
-            var fullName = type.FullName?.Replace('+', '.') ?? "";
-
-            if (excludedTypes.Contains(fullName)) { return true; }
-
-            return IsExcluded(type.BaseType);
         }
 
         /// <summary>
