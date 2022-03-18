@@ -1,29 +1,22 @@
 ﻿using FairyGUI;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Modules.FGUI
 {
     /// <summary>
     /// [ FairyGUI ] 工具类
     /// </summary>
-    public static class AddressablesUtil
+    public static class AssetsUtil
     {
         /// <summary>
         /// 默认的 [ FairyGUI ] 资源根目录
         /// </summary>
-        public const string DEFAULT_PACKAGE_ROOT = "Assets/AssetBundlesRoot/FGUI"; // TODO 保持与fgui资源的根地址一致 //
+        public static string DEFAULT_PACKAGE_ROOT = "Assets/AddressablesRoot/FGUI"; // TODO 保持与fgui资源的根地址一致 //
 
-        private static SortedList<string, AsyncOperationHandle> _handles;
-
-        static AddressablesUtil()
+        static AssetsUtil()
         {
-            _handles = new SortedList<string, AsyncOperationHandle>();
-
             NTexture.CustomDestroyMethod += texture => Addressables.Release(texture);
             NAudioClip.CustomDestroyMethod += audio => Addressables.Release(audio);
         }
@@ -34,7 +27,7 @@ namespace Modules.FGUI
         /// <param name="package">[ FairyGUI ] 资源包名</param>
         /// <param name="prefix">prefix of the resource file name. The file name would be in format of 'assetNamePrefix_resFileName'. It can be empty.</param>
         /// <param name="isFullPath">包名参数是否为完整的 [ Addressables ] 路径</param>
-        public static async Task<UIPackage> AddUIPackage(string package, string prefix = "", bool isFullPath = false)
+        public static async Task<UIPackage> AddAddressablePackage(string package, string prefix = "", bool isFullPath = false)
         {
             var pkg = UIPackage.GetByName(package);
 
@@ -84,55 +77,9 @@ namespace Modules.FGUI
         /// 在FGUI和Addressable中移除指定的包
         /// </summary>
         /// <param name="packageOrID">包名或者包ID</param>
-        public static void RemoveUIPackage(string packageOrID)
+        public static void RemoveAddressablePackage(string packageOrID)
         {
             UIPackage.RemovePackage(packageOrID);
-        }
-
-        public static async Task<T> Load<T>(string path, Action<T> callback) where T : UnityEngine.Object
-        {
-            var handle = Addressables.LoadAssetAsync<T>(path);
-            _handles.Add(path, handle);
-            await handle.Task;
-            callback?.Invoke(handle.Result);
-            return handle.Result;
-        }
-
-        public static async Task<Texture> LoadTexture(string path, Action<Texture> callback) => await Load<Texture>(path, callback);
-
-        public static async Task<AudioClip> LoadAudioClip(string path, Action<AudioClip> callback) => await Load<AudioClip>(path, callback);
-
-        public static void Release(string path)
-        {
-            if (_handles.TryGetValue(path, out var handle))
-            {
-                Addressables.Release(handle);
-                _handles.Remove(path);
-            }
-            else
-            {
-                throw new ArgumentException("asset path not found in addressables system", "path");
-            }
-        }
-
-        public static void Release<T>(T asset)
-        {
-            int k = -1;
-            for (int i = 0; i < _handles.Values.Count; i++)
-            {
-                var handle = _handles.Values[i];
-                if (handle.Result.Equals(asset))
-                {
-                    Addressables.Release(handle);
-                    k = i;
-                    break;
-                }
-            }
-            if (k < 0)
-            {
-                throw new ArgumentException("asset not found in addressables system", "asset");
-            }
-            _handles.RemoveAt(k);
         }
     }
 }

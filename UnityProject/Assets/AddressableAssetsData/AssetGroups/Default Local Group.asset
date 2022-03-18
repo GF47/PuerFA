@@ -18,11 +18,11 @@ MonoBehaviour:
   m_GUID: ae1dc971b7d89984eae8f34253164a1f
   m_SerializeEntries:
   - m_GUID: b24e6d293ec515b45aba3f9f06358625
-    m_Address: Assets/AssetBundlesRoot/Textures/UnitySplash-cube.png
+    m_Address: Assets/AddressablesRoot/Textures/UnitySplash-cube.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 32e701fa2f0e43044970a25ec85abd0b
-    m_Address: Assets/AssetBundlesRoot/Textures/U_Logo_T1_MadeWith_Small_White_RGB.png
+    m_Address: Assets/AddressablesRoot/Textures/U_Logo_T1_MadeWith_Small_White_RGB.png
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

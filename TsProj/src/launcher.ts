@@ -5,6 +5,8 @@ import { FairyGUI } from 'csharp';
 import UI_About from './FGUI/Common/UI_About';
 import CommonBinder from './FGUI/Common/CommonBinder';
 
+require('./puerts-source-map');
+
 console.log("hello ts");
 
 UnityEngine.Debug.Log('hello world from u');
@@ -13,7 +15,7 @@ UnityEngine.Debug.Log('hello world from u');
 // GRT.GLog.Log("hello world from g", 10);
 
 async function new_texture(path: string) {
-    let ptexture = await $promise(Modules.FGUI.AddressablesUtil.LoadTexture(path, null));
+    let ptexture = await $promise(Modules.AssetsManager.Instance.LoadTexture(path, null));
 
     let image = FairyGUI.UIObjectFactory.NewObject(FairyGUI.ObjectType.Image) as FairyGUI.GImage;
     image.texture = new FairyGUI.NTexture(ptexture);
@@ -23,9 +25,9 @@ async function new_texture(path: string) {
 
 let path =
 //*/
-'Assets/AssetBundlesRoot/Textures/UnitySplash-cube.png'; // default
+'Assets/AddressablesRoot/Textures/UnitySplash-cube.png'; // default
 /*/
-'Assets/AssetBundlesRoot/Textures/U_Logo_T1_MadeWith_Small_White_RGB.png'; // update
+'Assets/AddressablesRoot/Textures/U_Logo_T1_MadeWith_Small_White_RGB.png'; // update
 //*/
 
 new_texture(path);
@@ -48,7 +50,7 @@ class About {
 
 let about: About;
 async function openAbout() {
-    let pkg = await $promise(Modules.FGUI.AddressablesUtil.AddUIPackage('Common'));
+    let pkg = await $promise(Modules.FGUI.AssetsUtil.AddAddressablePackage('Common'));
     CommonBinder.bind();
     if (about == null) {
         about = new About(UI_About.createInstance());
@@ -59,3 +61,5 @@ async function openAbout() {
         about.ui.Center();
     }
 }
+
+console.log(new Error("test for ts source map").stack);

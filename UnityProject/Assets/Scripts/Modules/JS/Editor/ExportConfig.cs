@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace LK.Modules.JS.Editor
+namespace Modules.JS.Editor
 {
     public class AddClassToConfig : UnityEngine.ScriptableObject
     {
@@ -100,12 +100,12 @@ namespace LK.Modules.JS.Editor
                                     && !type.IsEnum
                                   select type);
 
-                var customNamespaces = new string[]
+                var customAssemblys = new string[]
                 {
                     "Assembly-CSharp",
                 };
 
-                var customTypes = (from assembly in customNamespaces.Select(s => Assembly.Load(s))
+                var customTypes = (from assembly in customAssemblys.Select(s => Assembly.Load(s))
                                    where !(assembly.ManifestModule is ModuleBuilder)
                                    from type in assembly.GetExportedTypes()
                                    where type.Namespace == null
@@ -131,6 +131,10 @@ namespace LK.Modules.JS.Editor
             var name = System.IO.Path.GetFileName(type.Assembly.Location);
 
             if (excludedAssemblies.Contains(name)) { return true; }
+
+            var namespace_ = type.Namespace?.Replace('+', '.') ?? "";
+
+            if (excludedNameSpaces.Contains(namespace_)) { return true; }
 
             var fullName = type.FullName?.Replace('+', '.') ?? "";
 
@@ -163,6 +167,9 @@ namespace LK.Modules.JS.Editor
                 ("MonoBehaviour", "OnRebuildRequested"),
                 ("Graphic", "OnRebuildRequested"),
                 ("Text", "OnRebuildRequested"),
+                ("Texture2D", "alphaIsTransparency"),
+                ("Texture", "imageContentsHash"),
+                ("Input", "IsJoystickPreconfigured"),
             };
             //--------------------------------------------------------------
             // 添加要屏蔽的方法
@@ -188,6 +195,10 @@ namespace LK.Modules.JS.Editor
         {
             "UnityEditor.dll",
             "Assembly-CSharp-Editor.dll",
+		};
+
+		private static readonly List<string> excludedNameSpaces = new List<string>
+		{
         };
 
         /// <summary>

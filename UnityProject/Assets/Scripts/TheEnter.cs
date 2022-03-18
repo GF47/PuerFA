@@ -22,6 +22,6 @@ public static class TheEnter
     {
         var js = Modules.JS.JSModule.Instance;
         yield return new WaitUntil(() => js.Ready);
-        js.Env.Eval("require('launcher')");
+        js.Env.Eval("require('bundle')");
     }
 }

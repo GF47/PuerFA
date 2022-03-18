@@ -5,6 +5,8 @@
 
 node_modules/
 
+/TsProj/src/FGUI/
+
 # ---> Unity
 /UnityProject/[Ll]ibrary/
 /UnityProject/[Ll]ogs/

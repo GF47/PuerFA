@@ -1,9 +1,14 @@
 {
-  "name": "ts-scripts",
-  "version": "1.0.0",
-  "description": "ts scripts",
+  "name": "tsproj",
+  "version": "2.0.0",
+  "description": "ts project",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "postbuild": "node copyJsFile.js ./.output/src ../UnityProject/Assets/AssetBundlesRoot/Scripts"
+    "debug": "node ./esbuild.config.debug.js",
+    "build": "node ./esbuild.config.build.js"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "esbuild": "^0.14.27",
+    "source-map-support": "^0.5.21"
   }
 }

@@ -30,7 +30,7 @@ namespace Modules.FGUI
 
         private async void LoadTexture(string url)
         {
-            var tex = await AddressablesUtil.LoadTexture(url, null);
+            var tex = await AssetsManager.Instance.LoadTexture(url, null);
             if (tex != null)
             {
                 onExternalLoadSuccess(new NTexture(tex));
@@ -51,10 +51,10 @@ namespace Modules.FGUI
             }
 #endif
 
-            AddressablesUtil.Release(texture.nativeTexture);
+            AssetsManager.Instance.Release(texture.nativeTexture);
             if (texture.alphaTexture != null)
             {
-                AddressablesUtil.Release(texture.alphaTexture);
+                AssetsManager.Instance.Release(texture.alphaTexture);
             }
         }
     }

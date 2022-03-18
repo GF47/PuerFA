@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 912d789768b0add45829ac208af3c937
   m_SerializeEntries:
   - m_GUID: d33e4d2a2f10c1547802cfa1a7bcb172
-    m_Address: Assets/AssetBundlesRoot/FGUI
+    m_Address: Assets/AddressablesRoot/FGUI
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

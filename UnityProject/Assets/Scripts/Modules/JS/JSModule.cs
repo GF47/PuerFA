@@ -51,7 +51,7 @@ namespace Modules.JS
 
         private async void LoadScripts()
         {
-            var root = "Assets/AssetBundlesRoot/Scripts/";
+            var root = "Assets/AddressablesRoot/Scripts/";
             var rootLength = root.Length;
             var ext = ".txt";
             var extLength = ext.Length;

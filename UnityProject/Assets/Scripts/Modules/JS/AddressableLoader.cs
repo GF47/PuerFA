@@ -1,5 +1,6 @@
 ﻿using Puerts;
 using UnityEngine;
+using System.IO;
 
 namespace Modules.JS
 {
@@ -18,10 +19,13 @@ namespace Modules.JS
         {
             var path = FormatFilePath(filepath);
 
-            debugpath = string.Empty;
+            if (InResources(path, out var content))
+            {
+                debugpath = Path.Combine(Application.dataPath, "3rd/Puerts/Src/Resources", filepath).Replace('\\', '/');
+                return content;
+            }
 
-            if (InResources(path, out var content)) { return content; }
-
+            debugpath = Path.Combine(Application.dataPath, "AddressablesRoot/Scripts", filepath + ".txt").Replace('\\', '/');
             return JSModule.Instance.JSFiles.TryGetValue(path, out content) ? content : string.Empty;
         }
 

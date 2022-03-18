@@ -1,1 +1,0 @@
-{"version":3,"file":"RemoteUpdateBinder.js","sourceRoot":"","sources":["../../../../src/FGUI/RemoteUpdate/RemoteUpdateBinder.ts"],"names":[],"mappings":";;AAEA,mCAAkC;AAElC,uCAAgC;AAEhC,MAAqB,kBAAkB;IAC/B,MAAM,CAAC,IAAI;QACjB,iBAAQ,CAAC,eAAe,CAAC,uBAAuB,CAAC,iBAAO,CAAC,GAAG,EAAE,GAAG,EAAE,CAAC,IAAI,iBAAO,EAAE,CAAC,CAAC;IACpF,CAAC;CACD;AAJD,qCAIC"}
